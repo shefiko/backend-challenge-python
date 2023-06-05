@@ -1,5 +1,11 @@
 # Backend test
 
+> If you want, you may also complete this challenge in:
+> [TypeScript](https://gitlab.com/limehome/interviews/backend-challenge-typescript)
+> or
+> [Java](https://gitlab.com/limehome/interviews/backend-challenge-java)
+
+
 ## Context
 
 We would like you to help us with a small service that we have for handling bookings. A booking for us simply tells us which guest will be staying in which unit, and when they arrive and the number of nights that guest will be enjoying our amazing suites, comfortable beds, great snac.. apologies - I got distracted. Bookings are at the very core of our business and it's important that we get these right - we want to make sure that guests always get what they paid for, and also trying to ensure that our unit are continually booked and have as few empty nights where no-one stays as possible. A unit is simply a location that can be booked, think like a hotel room or even a house. For the exercise today, we would like you to help us solve an issue we've been having with our example service, as well as implement a new feature to improve the code base. While this is an opportunity for you to showcase your skills, we also want to be respectful of your time and suggest spending no more than 3 hours on this (of course you may also spend longer if you feel that is necessary)
