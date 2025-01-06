@@ -9,7 +9,7 @@ freezegun==1.2.2
 h11==0.14.0
 httpcore==0.17.0
 httpx==0.24.0
-idna==3.4
+idna==3.7
 iniconfig==2.0.0
 Mako==1.2.4
 MarkupSafe==2.1.2
