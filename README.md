@@ -1,9 +1,9 @@
 # Backend test
 
 > If you want, you may also complete this challenge in:
-> [TypeScript](https://gitlab.com/limehome/interviews/backend-challenge-typescript)
+> [TypeScript](https://github.com/limehome/backend-challenge-typescript)
 > or
-> [Java](https://gitlab.com/limehome/interviews/backend-challenge-java)
+> [Java](https://github.com/limehome/backend-challenge-java)
 
 
 ## Context
