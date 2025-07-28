@@ -67,15 +67,15 @@ Open your terminal and run the following commands in the cloned directory (ignor
 (venv)[~]$ pytest
 
 =========================================================================== test session starts ============================================================================
-platform darwin -- Python 3.10.9, pytest-7.3.1, pluggy-1.0.0
-rootdir: /Users/saifmirza/work/backend-challenge-python
-plugins: freezegun-0.4.2, asyncio-0.21.0, anyio-3.6.2
-asyncio: mode=strict
+platform linux -- Python 3.11.13, pytest-7.4.4, pluggy-1.4.0
+rootdir: /code
+plugins: anyio-4.2.0, asyncio-0.23.4, freezegun-0.4.2
+asyncio: mode=Mode.STRICT
 collected 5 items                                                                                                                                                          
 
 ========================================================================= short test summary info ==========================================================================
 FAILED app/test_bookings.py::test_different_guest_same_unit_booking_different_date - AssertionError: {"guest_name":"GuestB","unit_id":"1","check_in_date":"2023-05-22","number_of_nights":5}
-================================================================= 1 failed, 4 passed, 21 warnings in 0.36s =================================================================
+================================================================= 1 failed, 4 passed, 20 warnings in 15.12s =================================================================
 
 ```
 
