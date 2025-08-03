@@ -139,3 +139,92 @@ def test_different_guest_same_unit_booking_different_date(test_db):
     )
     assert response.status_code == 400, response.text
     assert response.json()['detail'] == 'For the given check-in date, the unit is already occupied'
+
+
+@pytest.mark.freeze_time('2023-05-21')
+def test_extend_booking_not_found(test_db):
+    # Extend non-existent booking
+    response = client.post(
+        "/api/v1/booking/0/extend",
+        json={
+            'number_of_nights': 4
+        }
+    )
+    assert response.status_code == 404, response.text
+
+
+@pytest.mark.freeze_time('2023-05-21')
+def test_extend_booking(test_db):
+    # Create first booking
+    response = client.post(
+        "/api/v1/booking",
+        json={
+            'unit_id': '1',
+            'guest_name': 'GuestA',
+            'check_in_date': datetime.date.today().strftime('%Y-%m-%d'),
+            'number_of_nights': 5
+        }
+    )
+    assert response.status_code == 200, response.text
+
+    # GuestA extends the stay for 4 more days
+    response = client.post(
+        "/api/v1/booking/{}/extend".format(response.json()["id"]),
+        json={
+            'number_of_nights': 4
+        }
+    )
+
+    json = response.json()
+    assert response.status_code == 200, response.text
+    assert json['number_of_nights'] == 9, response.text
+
+    # GuestB tries to book the extended 4 days
+    response = client.post(
+        "/api/v1/booking",
+        json={
+            'unit_id': '1',
+            'guest_name': 'GuestB',
+            'check_in_date': (datetime.date.today() + datetime.timedelta(5)).strftime('%Y-%m-%d'),
+            'number_of_nights': 4
+        }
+    )
+    assert response.status_code == 400, response.text
+
+
+@pytest.mark.freeze_time('2023-05-21')
+def test_extend_booking_not_available(test_db):
+    # Create first booking
+    response = client.post(
+        "/api/v1/booking",
+        json={
+            'unit_id': '1',
+            'guest_name': 'GuestA',
+            'check_in_date': datetime.date.today().strftime('%Y-%m-%d'),
+            'number_of_nights': 5
+        }
+    )
+    assert response.status_code == 200, response.text
+    json = response.json()
+    booking_id = json["id"]
+
+    # GuestB books after GuestA
+    response = client.post(
+        "/api/v1/booking",
+        json={
+            'unit_id': '1',
+            'guest_name': 'GuestB',
+            'check_in_date': (datetime.date.today() + datetime.timedelta(5)).strftime('%Y-%m-%d'),
+            'number_of_nights': 3
+        }
+    )
+    assert response.status_code == 200, response.text
+
+    # GuestA extends the stay for 4 more days
+    response = client.post(
+        "/api/v1/booking/{}/extend".format(booking_id),
+        json={
+            'number_of_nights': 4
+        }
+    )
+    assert response.status_code == 400, response.text
